@@ -1,0 +1,255 @@
+Yes. Your current pipeline is correct for **ascending** order:
+
+```java
+numberList.stream()
+        .filter(i -> i % 2 == 0)
+        .sorted()
+        .forEach(System.out::println);
+```
+
+### Descending order
+
+Since `Integer` implements `Comparable`, you can use:
+
+```java
+numberList.stream()
+        .filter(i -> i % 2 == 0)
+        .sorted(Comparator.reverseOrder())
+        .forEach(System.out::println);
+```
+
+Or:
+
+```java
+.sorted(Comparator.comparingInt(Integer::intValue).reversed())
+```
+
+But for integers, **`Comparator.reverseOrder()` is the cleanest.**
+
+### Your complete code
+
+```java
+numberList.stream()
+        .filter(i -> i % 2 == 0)
+        .sorted(Comparator.reverseOrder())
+        .forEach(System.out::println);
+```
+
+Output starts:
+
+```text
+98
+96
+94
+92
+...
+4
+2
+0
+```
+
+---
+
+## Now let's practice Stream API
+
+Since you're learning this for **Java interviews**, I'd go progressively rather than jumping straight into complicated streams.
+
+### Level 1 — Basic `filter`
+
+Given:
+
+```java
+List<Integer> numbers = Arrays.asList(10, 15, 20, 25, 30, 35, 40);
+```
+
+**Q1.** Print all numbers greater than 20.
+
+**Q2.** Print all odd numbers.
+
+**Q3.** Print all numbers divisible by 5.
+
+**Q4.** Print all numbers between 15 and 35 inclusive.
+
+---
+
+### Level 2 — `map`
+
+```java
+List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+```
+
+**Q5.** Print the square of every number.
+
+Expected:
+
+```text
+1 4 9 16 25
+```
+
+**Q6.** Convert every number into `number * 10`.
+
+**Q7.** Given a list of names:
+
+```java
+List<String> names = Arrays.asList("john", "alice", "bob", "david");
+```
+
+Convert every name to uppercase.
+
+---
+
+### Level 3 — `filter + map + sorted`
+
+**Q8.**
+
+Given:
+
+```java
+List<Integer> numbers =
+    Arrays.asList(10, 3, 25, 8, 17, 4, 30, 11);
+```
+
+Find all **even numbers**, square them, and sort them in **descending order**.
+
+Think pipeline:
+
+```text
+numbers
+   ↓
+filter
+   ↓
+map
+   ↓
+sorted
+   ↓
+forEach
+```
+
+---
+
+### Level 4 — `count`, `min`, `max`
+
+**Q9.** Count how many even numbers exist.
+
+**Q10.** Find the maximum number.
+
+**Q11.** Find the minimum even number.
+
+**Q12.** Find the sum of all numbers.
+
+---
+
+### Level 5 — `distinct`
+
+```java
+List<Integer> numbers =
+    Arrays.asList(10, 20, 10, 30, 20, 40, 30, 50);
+```
+
+**Q13.** Print only unique numbers.
+
+**Q14.** Print unique numbers in descending order.
+
+---
+
+### Level 6 — Strings
+
+```java
+List<String> names =
+    Arrays.asList("John", "Alice", "Bob", "Alexander", "David", "Amy");
+```
+
+**Q15.** Find names having more than 4 characters.
+
+**Q16.** Sort names alphabetically.
+
+**Q17.** Sort names by length.
+
+**Q18.** Sort names by length in descending order.
+
+**Q19.** Find the longest name.
+
+**Q20.** Count names starting with `"A"`.
+
+---
+
+### Level 7 — Interview-style
+
+Now start combining operations.
+
+```java
+List<Integer> numbers =
+    Arrays.asList(5, 12, 3, 18, 7, 20, 12, 9, 30, 3);
+```
+
+**Q21.**
+
+> Find the second-highest unique number.
+
+Don't use a loop.
+
+Think:
+
+```text
+distinct → sorted descending → skip → first
+```
+
+**Q22.**
+
+> Find the third-smallest unique number.
+
+**Q23.**
+
+> Find the average of all even numbers.
+
+**Q24.**
+
+> Find the sum of squares of all odd numbers.
+
+**Q25.**
+
+> Find the number of even numbers greater than 10.
+
+---
+
+### One important thing
+
+Don't memorize Stream API as random methods.
+
+Think of it as a **pipeline**:
+
+```text
+SOURCE
+  ↓
+filter()      → remove things
+  ↓
+map()         → transform things
+  ↓
+distinct()    → remove duplicates
+  ↓
+sorted()      → order things
+  ↓
+limit()/skip()
+  ↓
+TERMINAL OPERATION
+```
+
+Terminal operations:
+
+```java
+forEach()
+count()
+collect()
+reduce()
+min()
+max()
+findFirst()
+findAny()
+anyMatch()
+allMatch()
+noneMatch()
+```
+
+For your current level, I'd recommend **not jumping to `groupingBy`, `flatMap`, collectors, or parallel streams yet**.
+
+Start with Q1–Q25. For each one, **try to tell me the pipeline before writing code**. That will build the interview skill rather than just memorizing syntax.
