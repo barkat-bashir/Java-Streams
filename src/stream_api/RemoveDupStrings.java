@@ -1,6 +1,9 @@
 package stream_api;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class RemoveDupStrings {
@@ -14,13 +17,6 @@ public class RemoveDupStrings {
               //  .sorted((a,b)->a.length()-b.length()) // based on length
                 .forEach(System.out::println);
 
-//using hashSet .collect(Collectors.toCollection(() -> new TreeSet<>(customComparator)));
-
-        HashSet<String> sortedUniqueNames = namesList.stream()
-
-                .collect(Collectors.toCollection(()->new TreeSet<>((a,b)->a.length() -b.length())));
-
-        sortedUniqueNames.forEach(System.out::println);
 
     }
 }
