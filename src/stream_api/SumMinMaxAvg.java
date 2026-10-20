@@ -17,7 +17,7 @@ public class SumMinMaxAvg {
         System.out.println("sum :" + sum);
 
         sum = numbers.stream().reduce(0,(a,b)-> a+b); // using reduce operation
-        System.out.println("sum :" + sum);
+        System.out.println("sum :" + sum); 
 
 //  MINIMUM
        min = numbers.stream()
