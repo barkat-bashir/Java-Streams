@@ -11,6 +11,6 @@ public class StringLengthCount {
          long num = namesList.stream()
                 .filter(name ->name.length() >4)
                 .count();
-         System.out.println(num);
+         System.out.println(num); 
     }
 }
